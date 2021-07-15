@@ -1,0 +1,121 @@
+@startuml
+left to right direction
+hide empty members
+title Class Diagram - SP01
+
+class AddEmailController {
+}
+
+class AddFamilyAdministratorController {
+}
+
+class AddFamilyController {
+}
+
+class AddFamilyMemberController {
+}
+
+class AddRelationController {
+}
+
+class AddStandardCategoryController {
+}
+
+class CreateFamilyCashAccountController{
+}
+
+class GetCategoryTreeController {
+}
+
+class GetFamilyMemberProfileController {
+}
+
+class GetFamilyMembersListController {
+}
+
+class GetStandardCategoriesTreeController {
+}
+
+class Application {
+}
+
+class CategoryService {
+}
+
+class StandardCategory {
+}
+
+class CustomCategory {
+}
+
+class CategoryTreeDTO {
+}
+
+class FamilyService {
+}
+
+class FamilyMemberRelationDTO {
+}
+
+class FamilyWithoutAdministratorDTO {
+}
+
+class Family {
+}
+
+class CashAccount {
+}
+
+class FamilyMember {
+}
+
+class MemberProfileDTO {
+}
+
+class Address {
+}
+
+class CCNumber {
+}
+
+class PhoneNumber {
+}
+
+class EmailAddress {
+}
+
+class Relation {
+}
+
+class VatNumber {
+}
+
+AddEmailController --> Application
+AddFamilyController --> Application
+AddFamilyAdministratorController --> Application
+AddFamilyMemberController --> Application
+AddRelationController --> Application
+AddStandardCategoryController --> Application
+CreateFamilyCashAccountController --> Application
+GetCategoryTreeController --> Application
+GetFamilyMemberProfileController --> Application
+GetFamilyMembersListController --> Application
+GetStandardCategoriesTreeController --> Application
+Application --> FamilyService
+Application --> CategoryService
+CategoryService --> CustomCategory
+CategoryService --> StandardCategory
+CategoryService -left-> CategoryTreeDTO
+FamilyService -right-> FamilyWithoutAdministratorDTO
+FamilyService --> Family
+Family --> CashAccount
+Family --> FamilyMember
+Family -right-> FamilyMemberRelationDTO
+FamilyMember --> Address
+FamilyMember --> CCNumber
+FamilyMember --> PhoneNumber
+FamilyMember --> Relation
+FamilyMember -left-> MemberProfileDTO
+FamilyMember --> EmailAddress
+FamilyMember --> VatNumber
+@enduml

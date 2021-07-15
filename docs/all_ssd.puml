@@ -1,0 +1,371 @@
+@startuml
+
+    autonumber
+    title createStandardCategory SSD
+    actor "System Manager" as systemManager
+    participant "System" as system
+
+    activate systemManager
+    systemManager -> system: create a Standard Category
+    activate system
+    systemManager -> system: input required data
+    system --> systemManager: inform success
+    deactivate system
+
+@enduml
+
+@startuml
+    title Get Standard Category Tree\n extended from complementary system SSD
+    actor "System Manager" as systemManager
+    participant "System" as system
+
+    activate systemManager
+    systemManager -> system: get standard category tree
+    activate system
+    system --> systemManager: category tree
+    deactivate system
+@enduml
+
+@startuml
+
+header SSD
+title Create Family and Set Administrator
+autonumber
+actor "System Manager" as Actor
+participant "System" as System
+activate Actor
+Actor -> System : Create a family and set administrator
+activate System
+System --> Actor : Request Family Name and Administrator Data (Name, Birthdate, \nemail (ID), Vat Number, Phone Number, Address)
+Actor -> System : Input Family Name and Administrator Data (Name, Birthdate, \nemail (ID), Vat Number, Phone Number, Address)
+alt failure
+System --> Actor : Inform Failure
+else success
+System --> Actor : Inform Success
+end
+deactivate System
+deactivate Actor
+@enduml
+
+@startuml
+
+header SSD
+title Add a Family Member
+autonumber
+actor "Family Administrator" as Actor
+participant "System" as System
+activate Actor
+Actor -> System : Add a family member
+activate System
+System --> Actor : Request Person Data (Name, Birthdate, \nemail (ID), Vat Number, Phone Number, Address)
+Actor -> System : Input Person Data (Name, Birthdate, \nemail (ID), Vat Number, Phone Number, Address)
+System --> Actor : Inform Success
+deactivate System
+deactivate Actor
+@enduml
+
+@startuml
+    title Get Family Members and their Relations SSD
+    actor "Family Administrator" as systemManager
+    participant "System" as system
+
+    activate systemManager
+    systemManager -> system: get family members and their relations
+    activate system
+    system --> systemManager: family members and their relations
+    deactivate system
+@enduml
+
+@startuml
+
+autonumber
+title Create Relation
+
+actor "Family Administrator" as familyAdministrator
+participant ": System" as system
+
+activate familyAdministrator
+familyAdministrator -> system : add relation to member
+activate system
+familyAdministrator -> system : inputs required data
+
+alt failure
+system -> familyAdministrator : Inform Failure
+
+else sucess
+system -> familyAdministrator : Inform Sucess
+
+end
+
+deactivate system
+
+deactivate familyAdministrator
+@enduml
+
+@startuml
+autonumber
+title Change Relation
+
+actor "Family Administrator" as familyAdministrator
+participant ": System" as system
+
+activate familyAdministrator
+familyAdministrator -> system : Change relation between memebers
+activate system
+familyAdministrator -> system : Inputs required data
+
+alt failure
+system -> familyAdministrator : Inform Failure
+
+else success
+system -> familyAdministrator : Inform Sucess
+
+end
+
+deactivate system
+
+deactivate familyAdministrator
+@enduml
+
+@startuml
+
+header SSD
+title Get family's categories list
+autonumber
+actor "FamilyMember" as Actor
+participant "System" as System
+activate Actor
+Actor -> System : Get the categories list
+activate System
+System --> Actor : Return Category List ()
+deactivate System
+deactivate Actor
+
+@enduml
+
+@startuml
+    autonumber
+    title Add Category to Family Tree
+    actor "Family Administrator" as systemManager
+    participant "System" as system
+
+    activate systemManager
+    systemManager -> system: Add Category To Family Tree
+    activate system
+   system --> systemManager: Ask for Category name and Parent
+   systemManager->system: Input Category name and Parent
+    system --> systemManager: Inform success
+    deactivate system
+    deactivate systemManager
+@enduml
+
+@startuml
+autonumber 1
+title Create Family Cash Account
+actor "FamilyAdministrator" as familyAdmin
+participant "System" as System
+
+
+activate familyAdmin
+familyAdmin -> System: create a Family Cash \n Account (familyID, balance)
+activate System
+
+alt failure
+System --> familyAdmin: Inform Failure - \nFamily already has account
+
+else success
+
+System --> familyAdmin: Inform Success - \nAccount created
+deactivate System
+end
+
+deactivate familyAdmin
+
+@enduml
+
+@startuml
+autonumber
+title Transfer to Personal Cash Account
+
+Actor "FamilyAdmin" as Actor
+Participant "System" as System
+
+activate Actor
+Actor -> System : Transfer Money \nto Family Member
+activate System
+System --> Actor : ask for required data
+Actor -> System : required data
+System --> Actor : inform success
+deactivate System
+@enduml
+
+@startuml
+autonumber
+title Check Family or Family Member Cash Account
+
+actor "Family Administrator" as familyMember
+participant ": System" as system
+
+activate familyMember
+
+familyMember -> system : check balance of Family or Family Member Cash Account
+activate system
+
+return Balance
+
+deactivate familyMember
+@enduml
+
+@startuml
+
+header SSD
+title Get my profile information
+autonumber
+actor "FamilyMember" as Actor
+participant "System" as System
+activate Actor
+Actor -> System : Get my profile information
+activate System
+System --> Actor : Return Family Member Data (Name, Email (ID), Birthdate, \nOther Emails, Vat Number, Phone Numbers and Address)
+deactivate System
+deactivate Actor
+
+@enduml
+
+@startuml
+
+header SSD
+title Add an Email Address
+autonumber
+actor "Family Member" as Actor
+participant "System" as System
+activate Actor
+Actor -> System : Add an email address
+activate System
+System --> Actor : Request Data (email address)
+Actor -> System : Input Data (email address)
+System --> Actor : Inform Success
+deactivate System
+deactivate Actor
+@enduml
+
+@startuml
+autonumber
+    title Create Account
+    actor "Family Member" as systemManager
+    participant "System" as system
+
+    activate systemManager
+    systemManager -> system: create Account
+    activate system
+   system --> systemManager: ask for data
+   systemManager->system: input data
+    system --> systemManager: inform success
+    deactivate system
+    deactivate systemManager
+@enduml
+
+@startuml
+autonumber
+title Transfer Money between Family Members
+
+actor "Family Member" as familyMember
+participant ": System" as system
+
+activate familyMember
+familyMember-> system : transfer money
+activate system
+system -> familyMember: requests required data
+familyMember-> system : send required data
+alt failure
+system -> familyMember: Inform Failure
+else sucess
+system -> familyMember : Inform Sucess
+
+end
+
+deactivate system
+
+deactivate familyMember
+@enduml
+
+@startuml
+autonumber
+title Register Payment with My Cash Account
+
+actor "Family Member" as familyMember
+participant ": System" as system
+
+activate familyMember
+familyMember-> system : register Payment on 1 of my Cash Accounts
+activate system
+system -> familyMember : asks required data
+familyMember -> system : inputs required data
+
+alt failure
+system -> familyMember : Inform Failure
+
+else sucess
+system -> familyMember : Inform Sucess
+
+end
+
+deactivate system
+
+deactivate familyMember
+@enduml
+
+@startuml
+autonumber
+title Check Account Balance
+
+actor "Family Administrator" as familyMember
+participant ": System" as system
+
+activate familyMember
+
+familyMember -> system : check balance of Account
+activate system
+
+return Balance
+
+deactivate familyMember
+@enduml
+
+@startuml
+autonumber
+title Get list Of Movements Between Dates
+
+actor "Family Member" as member
+participant "System" as system
+
+activate member
+member -> system : choose account
+activate system
+member -> system : select dates
+
+system --> member : return list
+
+deactivate system
+@enduml
+
+@startuml
+autonumber
+
+title Check Children Cash Account Balance
+actor "Parent" as Parent
+participant "System" as System
+
+activate Parent
+Parent -> System: checkChildrenCashAccountBalance
+activate System
+System --> Parent: request data
+Parent -> System: input data
+alt failure
+System --> Parent: inform failure
+else success
+System --> Parent: inform success
+deactivate System
+end alt
+deactivate Parent
+@enduml

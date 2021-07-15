@@ -1,0 +1,39 @@
+
+@startuml
+
+autonumber
+header Sequence Diagram
+title US010 FamilyAssembler Domain to Data
+
+participant ": familyDataDomainAssembler" as assembler
+participant "aFamily : Family" as Family
+participant "aFamilyIDJPA : FamilyIDJPA" as FamilyIDJPA
+participant "adminIDJPA : PersonIDJPA" as PersonIDJPA
+participant "aFamilyJPA : FamilyJPA" as FamilyJPA
+
+
+-> assembler : toData(Family)
+activate assembler
+assembler -> Family : id()
+activate Family
+Family -> assembler : familyID
+deactivate Family
+assembler -> FamilyIDJPA** : create(familyID)
+assembler -> Family : getAdmin()
+activate Family
+Family -> assembler : PersonID
+deactivate Family
+assembler -> PersonIDJPA** : create(PersonID)
+assembler -> Family : getName()
+activate Family
+Family -> assembler : name
+deactivate Family
+assembler -> Family : getRegistrationDate()
+activate Family
+Family -> assembler : registrationDate
+deactivate Family
+assembler -> FamilyJPA** : create(familyIDJPA, name, registrationDate, adminIDJPA)
+<- assembler : FamilyJPA
+deactivate assembler
+
+@enduml

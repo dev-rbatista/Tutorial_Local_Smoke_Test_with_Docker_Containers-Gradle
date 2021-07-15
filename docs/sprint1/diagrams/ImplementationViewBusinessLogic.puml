@@ -1,0 +1,32 @@
+@startuml
+
+title Business Logic Implementation View - SP01
+
+package controllers
+package domain {
+package services
+package model
+package utils
+}
+rectangle a [
+Correlates with "Controllers" \ncomponent of LogicView
+]
+rectangle b [
+Correlates with "Services" \ncomponent of LogicView
+]
+rectangle c [
+Correlates with "Model" \ncomponent of LogicView
+]
+rectangle d [
+Correlates with "Utils" \ncomponent of LogicView
+]
+
+controllers -. a
+controllers -> domain
+services -> model
+services -. b
+model -> utils
+model -. c
+utils -. d
+
+@enduml

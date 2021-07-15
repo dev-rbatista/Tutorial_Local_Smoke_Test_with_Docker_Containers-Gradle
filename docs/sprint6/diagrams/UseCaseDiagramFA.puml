@@ -1,0 +1,27 @@
+@startuml
+
+left to right direction
+
+title Use Case Diagram - Family Administrator
+
+actor "Family Administrator" as fa
+
+usecase "add family members" as uc101
+usecase "get the list of family members \nand their relations" as uc104
+usecase "manage relations between two \nfamily members" as uc105
+usecase "get the list of the categories \non the family’s category tree" as uc110
+usecase "add a category to the family’s category tree" as uc111
+usecase "create a family cash account" as uc120
+usecase "transfer money from the family’s cash \naccount to another family member’s cash account" as uc130
+usecase "check the balance of the family’s \ncash account or of a given family member" as uc135
+
+fa -- uc101
+fa -- uc104
+fa -- uc105
+fa -- uc110
+fa -- uc120
+fa -- uc111
+fa -- uc130
+fa -- uc135
+
+@enduml

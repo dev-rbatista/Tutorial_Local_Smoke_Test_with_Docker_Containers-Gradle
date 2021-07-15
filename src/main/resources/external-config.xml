@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--<bean id="externalCategories"
+            class="switchtwentytwenty.project.interfaceadapters.implrepositories.ExternalCategoryRepositoryGroupFour">
+
+          <property name="resource" value="http://vs260.dei.isep.ipp.pt:8080/api/categories/"/>
+
+          <constructor-arg index="0">
+              <bean class="switchtwentytwenty.project.dto.assemblers.implassemblers.ExternalCategoryDTODomainAssemblerGroupFour"/>
+          </constructor-arg>
+
+          <constructor-arg index="1">
+              <bean class="switchtwentytwenty.project.domain.aggregates.category.CategoryFactory"/>
+          </constructor-arg>
+
+          <constructor-arg index="2">
+              <bean class="org.springframework.web.client.RestTemplate"/>
+          </constructor-arg>
+      </bean>-->
+
+      <bean id="externalCategories"
+            class="switchtwentytwenty.project.interfaceadapters.implrepositories.ExternalCategoryRepositoryGroupTwo"
+            primary="true">
+
+          <property name="resource" value="http://vs118.dei.isep.ipp.pt:8080/categories/standard"/>
+
+          <constructor-arg index="0">
+              <bean class="switchtwentytwenty.project.dto.assemblers.implassemblers.ExternalCategoryDTODomainAssemblerGroupTwo"/>
+          </constructor-arg>
+
+          <constructor-arg index="1">
+              <bean class="switchtwentytwenty.project.domain.aggregates.category.CategoryFactory"/>
+          </constructor-arg>
+          <constructor-arg index="2">
+              <bean class="org.springframework.web.client.RestTemplate"/>
+          </constructor-arg>
+
+      </bean>
+
+
+</beans>

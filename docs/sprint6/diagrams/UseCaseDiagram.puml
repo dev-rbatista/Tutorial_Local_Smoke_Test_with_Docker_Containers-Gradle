@@ -1,0 +1,66 @@
+@startuml
+
+left to right direction
+
+title Use Case Diagram - SP06
+
+actor "Parent" as parent
+actor "Family Member" as fm
+actor "Family Administrator" as fa
+actor "System User" as su
+actor "System Manager" as sm
+
+usecase "UC001 - to create a standard category" as uc001
+usecase "UC002 - to get the standard categories \ntree" as uc002
+usecase "UC003 - to include external categories loaded \nfrom a complementary system by configuration" as uc003
+usecase "UC010 - to create a family and set a \nfamily administrator" as uc010
+usecase "UC080 - to login into the application" as uc080
+usecase "UC101 - to add family members" as uc101
+usecase "UC104 - to get the list of family members \nand their relations" as uc104
+usecase "UC105 - to create a relation between two \nfamily members" as uc105
+usecase "UC106 - to change the relation between two family members" as uc106
+usecase "UC110 - to get the list of the categories \non the family’s category tree" as uc110
+usecase "UC111 - to add a category to the family’s category tree \n that may be extended from an external category" as uc111
+usecase "UC120 - to create a family cash account" as uc120
+usecase "UC130 - to transfer money from the family’s cash \naccount to another family member’s cash account" as uc130
+usecase "UC135 - to check the balance of the family’s \ncash account or of a given family member" as uc135
+usecase "UC150 - to get my profile’s information" as uc150
+usecase "UC151 - to add an email account to my \nprofile" as uc151
+usecase "UC170 - to create a personal cash account" as uc170
+usecase "UC171 - to add a bank account I have" as uc171
+usecase "UC172 - to add a bank savings account I have" as uc172
+usecase "UC173 - to add a credit card account I have" as uc173
+usecase "UC180 - to transfer money from my cash \naccount to another family member’s cash account" as uc180
+usecase "UC181 - to register a payment that I have \nmade using one of my cash accounts" as uc181
+usecase "UC185 - to check the balance of one of my accounts" as uc185
+usecase "UC186 - to get the list of movements \non one of my accounts between to dates" as uc186
+usecase "UC188 - to check the balance of one \nof my children’s cash account" as uc188
+
+sm -- uc001
+sm -- uc002
+sm -- uc003
+sm -- uc010
+su -- uc080
+fa -- uc101
+fa -- uc104
+fa -- uc105
+fa -- uc110
+fa -- uc111
+fa -- uc120
+fa -- uc106
+fa -- uc111
+fa -- uc130
+fa -- uc135
+fm -- uc150
+fm -- uc151
+fm -- uc170
+fm -- uc171
+fm -- uc172
+fm -- uc173
+fm -- uc180
+fm -- uc181
+fm -- uc185
+fm -- uc186
+parent -- uc188
+
+@enduml

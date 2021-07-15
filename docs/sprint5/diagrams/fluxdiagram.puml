@@ -1,0 +1,63 @@
+@startuml
+left to right direction
+
+title SysManager View
+
+Index <<Sys>> --> Categories
+
+Categories --> OPTIONS/ /categories
+Categories --> GET/ /categories (category tree)
+Categories --> POST/ /categories (create standard category)
+
+Index <<Sys>> --> Families
+
+Families --> OPTIONS/ /families
+Families --> POST/ /families (create family)
+
+@enduml
+
+@startuml
+left to right direction
+
+title FamilyAdmin View
+
+Index <<Sys>> --> Families
+
+Families --> OPTIONS/ /families/{familyID}
+Families --> POST/ /families/{familyID}/relations (add relation)
+Families --> PATCH/ /families/{familyID}/relations (change relation)
+Families --> POST/ /families/{familyID}/categories (create custom category)
+Families --> GET/ /families/{familyID}/categories (get family categories)
+
+Index <<Sys>> --> Accounts
+
+Accounts --> OPTIONS/ /accounts
+Accounts --> POST/ /accounts (create account)
+Accounts --> GET/ /accounts/{accountID} (check balance)
+
+
+Index <<Sys>> --> Members
+
+Members --> OPTIONS/ /members
+Members --> GET/ /members (get family members and their relations)
+Members --> POST/ /members (create member)
+
+@enduml
+
+@startuml
+left to right direction
+
+title Members View
+
+Index <<Sys>> --> Members
+
+Members --> OPTIONS/ /members⁄{memberID}
+Members --> GET/ /members/{memberID} (get profile info)
+
+Index <<Sys>> --> Accounts
+
+Accounts --> OPTIONS/ /accounts
+Accounts --> POST/ /accounts (create account)
+Accounts --> GET/ /accounts/{accountID} (check balance)
+
+@enduml

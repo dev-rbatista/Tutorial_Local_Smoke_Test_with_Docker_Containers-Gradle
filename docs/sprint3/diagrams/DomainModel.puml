@@ -1,0 +1,178 @@
+@startuml
+hide empty members
+skinparam linetype ortho
+
+class Family {
+- Name
+- Registration Date
+}
+
+class Person {
+- Name
+- VAT Number
+- Birth Date
+- Address
+}
+
+class PhoneNumber {
+}
+
+class EmailAddress {
+}
+
+class Relation {
+}
+
+class CashAccount {
+}
+
+class BankAccount {
+}
+
+class DebitCardAccount {
+}
+
+class CreditCardAccount {
+}
+
+interface Account {
+}
+
+interface Movement {
+}
+
+class Debit {
+}
+
+class Credit {
+}
+
+interface FinancialTransaction {
+}
+
+class Transfer {
+}
+
+class Payment {
+}
+
+class FinancialService {
+}
+
+class Ledger {
+}
+
+interface Category {
+}
+
+class StandardCategory {
+}
+
+class CustomCategory {
+}
+
+class Invoice {
+- VAT of family member
+- VAT of seller or supplier
+- Date
+- Value
+}
+
+class Contract {
+- Contract Number
+- Ohter infomation
+}
+
+class EFacture {
+}
+
+interface FutureTransaction {
+}
+
+class Unique {
+- Date
+}
+
+class Recurrent {
+- Frequency
+- Start Date
+- End Date
+}
+
+class ForecastLedger {
+}
+
+class ExternalForecastComponent {
+}
+
+'Family to Person
+Family "1" --- "members \n 1..*" Person
+Family "1" --- "admin \n 1" Person
+
+'Person to attributes
+Person "1" -- "0..1" PhoneNumber
+Person "1" -- "1..*" EmailAddress
+Person "2" -- "0..*" Relation
+
+'Account interface to Accounts
+CashAccount -.|> Account
+BankAccount -.|> Account
+DebitCardAccount -.|> Account
+CreditCardAccount -.|> Account
+
+'Person to Accounts
+Person "1" -- "0..1" CashAccount
+Person "1" -- "0..*" BankAccount
+Person "1" -- "0..*" DebitCardAccount
+Person "1" -- "0..*" CreditCardAccount
+
+'Family to CashAccount
+Family "1" -- "0..1" CashAccount
+
+'Movement to Account
+Movement "0..*" -up- "1" Account
+
+'Movement to Credit and Debit
+Debit -.|> Movement
+Credit -.|> Movement
+
+'Movement to FinancialTransaction
+Movement "1..*" -- "1" FinancialTransaction
+
+'Financial Transaction implementations
+Transfer -.|> FinancialTransaction
+Payment -.|> FinancialTransaction
+
+'Person to Financial Transaction
+Person "1" -- "Cash \n 0..1" FinancialTransaction : inputs >
+
+'Financial Transaction to Financial Service, Ledger and Category
+FinancialTransaction "Electronic 0..*" -- "1" FinancialService : provides >
+FinancialTransaction "0..*" -- "1..*" Ledger : is registered >
+FinancialTransaction "0..*" -- "1" Category : < classifies
+
+'Categories
+StandardCategory -.|> Category
+CustomCategory -.|> Category
+StandardCategory "0..*" -- "0..1" StandardCategory : is child >
+CustomCategory "0..*" -- "0..1" Category : is child >
+Family "1" -- "0..*" CustomCategory : creates >
+
+'Invoice
+StandardCategory "1" -- "0..*" Invoice : classifies >
+Payment "1" -- "1" Invoice : involves >
+Invoice "1..*" -- "0..1" Contract : has >
+Invoice "0..*" -- "1" EFacture : provides >
+Invoice "0..1" -- "0..1" FutureTransaction : < matches
+
+'Future Transactions
+Unique -.|> FutureTransaction
+Recurrent -.|> FutureTransaction
+FutureTransaction "0..*" -- "1" ForecastLedger : uses >
+ForecastLedger "1" -- "1" Ledger : < has
+ForecastLedger -- ExternalForecastComponent
+
+'Ledger
+Ledger "1" -- "1" Person : has >
+
+@enduml

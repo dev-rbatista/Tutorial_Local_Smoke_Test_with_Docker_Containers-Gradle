@@ -1,0 +1,13 @@
+@startuml
+left to right direction
+
+title System Overview Hypothesis II - SP01
+
+note "All actors share the same UI" as a
+component "Family Finance Management System" {
+}
+() "UI" as UI
+
+UI --# "Family Finance Management System"
+
+@enduml

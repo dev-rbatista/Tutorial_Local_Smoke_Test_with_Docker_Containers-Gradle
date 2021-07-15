@@ -1,0 +1,61 @@
+@startuml
+
+autonumber
+header Sequence Diagram
+title US010 Create a Family and Set Administrator
+
+
+participant ": ICreateFamilyService" as FamAdminService
+participant "adminID\n : PersonID" as adminID
+participant ": IFamilyRepository" as familyRepository
+participant ": IPersonRepository" as personRepository
+participant ": IPersonRepositoryJPA" as personRepositoryJPA
+participant ": IFamilyRepositoryJPA" as familyRepositoryJPA
+
+note left: especificar nome da instância no participant?
+
+-> FamAdminService : createFamilyAndAddAdmin\n(inputFamilyDTO, inputPersonDTO)
+activate FamAdminService
+
+FamAdminService -> adminID ** : create\n(inputPersonDTO.unpackEmail())
+
+FamAdminService -> familyRepository : generateID()
+activate familyRepository
+return familyID
+
+ref over FamAdminService
+admin = personDTODomainAssembler.toDomain(inputPersonDTO,familyID)
+end ref
+
+ref over FamAdminService
+family = familyDTODomainAssembler.toDomain(inputFamilyDTO,familyID,adminID)
+end ref
+
+FamAdminService -> personRepository: add(admin)
+activate personRepository
+
+ref over personRepository
+personJPA = personAssembler.toData(admin)
+end ref
+
+personRepository -> personRepositoryJPA: save(personJPA)
+activate personRepositoryJPA
+return
+return
+
+FamAdminService -> familyRepository: add(newFamily)
+activate familyRepository
+
+ref over familyRepository
+familyJPA = familyAssembler.toData(newFamily)
+end ref
+
+familyRepository -> familyRepositoryJPA : save(familyJPA)
+activate familyRepositoryJPA
+return
+
+return
+
+return
+
+@enduml

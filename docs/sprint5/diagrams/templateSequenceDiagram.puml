@@ -1,0 +1,62 @@
+@startuml
+
+autonumber
+
+participant ": IController" as controller <<interface>>
+participant ": InputDTOAssembler" as inputDto
+participant ": IService" as service <<interface>>
+participant ": DTODomainAssembler" as dtoDomain
+participant "entity\n : Entity" as entity
+participant "savedEntity\n : Entity" as savedEntity
+participant ": IRepository" as repository <<interface>>
+participant ": DataDomainAssembler" as dataDomain
+participant ": IRepositoryJPA" as repositoryJPA <<interface>>
+
+-> controller : Request(requestBody)
+activate controller
+
+ref over controller, inputDto
+Assemble ExternalDTO to InputDTO
+end
+
+controller -> service : createEntity(inputEntityDTO)
+activate service
+
+ref over service, dtoDomain
+Assemble InputDTO to Value Objects
+end
+
+service -> entity ** : create(valueObjects)
+
+service -> repository : add(entity)
+activate repository
+
+ref over repository, dataDomain
+Assemble Entity to EntityJPA
+end
+
+repository -> repositoryJPA : save(entityJPA)
+activate repositoryJPA
+return savedEntityJPA
+
+ref over repository, dataDomain
+Assemble EntityJPA to Value Objects
+end
+
+repository -> savedEntity ** : create(valueObjects)
+
+return savedEntity
+
+ref over service, dtoDomain
+Assemble Entity to OutputDTO
+end
+
+return outputEntityDTO
+
+ref over controller, inputDto
+Add Links to OutputDTO
+end
+
+return ResponseEntity\n(outputEntityDTO, HttpStatus)
+
+@enduml

@@ -1,0 +1,25 @@
+@startuml
+
+title General Logic View - SP01
+
+left to right direction
+component "Family Finance Management System" as FFMS <<component>> {
+   component "FFM_UI" <<component>> {
+   }
+   component "FFM_BusinessLogic" <<component>>  {
+   }
+}
+() "UI" as UI
+
+note "Not yet being developed" as a
+note "Being developed in SP01" as b
+note "Assuming the simplest \nhypothesis (H.II) in System Overview" as c
+
+c .right. UI
+UI --# FFMS
+FFMS -- "FFM_UI"
+"FFM_UI" -(0- "FFM_BusinessLogic" : BL_API
+"FFM_UI" .left. a
+"FFM_BusinessLogic" .left. b
+
+@enduml

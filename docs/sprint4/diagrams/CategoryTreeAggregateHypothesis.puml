@@ -1,0 +1,106 @@
+@startuml
+hide empty members
+skinparam linetype ortho
+
+package FamilyAggregate{
+class Family <<Entity>> <<Root>> {
+}
+}
+
+package PersonAggregate {
+class Person <<Entity>> <<Root>> {
+}
+}
+
+package CategoryTreeAggregate {
+class CategoryTree <<Entity>> <<Root>> {
+}
+
+interface Category <<Entity>> {
+}
+
+class StandardCategory <<Entity>> {
+}
+
+class CustomCategory <<Entity>> {
+}
+}
+
+class FamilyName <<ValueObject>> {
+}
+
+class RegistrationDate <<ValueObject>> {
+}
+
+class FamilyID <<ValueObject>> <<ID>> {
+}
+
+class Email <<ValueObject>> <<ID>> {
+}
+
+class Relation <<ValueObject>> {
+}
+
+class RelationDesignation <<ValueObject>> {
+}
+
+class VATnumber <<ValueObject>> {
+}
+
+class Name <<ValueObject>> {
+}
+
+class PhoneNumber <<ValueObject>> {
+}
+
+class BirthDate <<ValueObject>> {
+}
+
+class Address <<ValueObject>> {
+}
+
+
+class CategoryDesignation <<ValueObject>> {
+}
+
+class CategoryID <<ValueObject>> <<ID>> {
+}
+
+'Family
+Family "1" --> "1" FamilyName
+Family "1" --> "1" RegistrationDate
+Family "1" --> "ID\n1" FamilyID
+Family "1" --down-> "admin 1" Email
+Family --> "1..* familyMembers" Email
+
+'Person
+Person "1" --> "1 ID" Email
+Person "1" --> "0..* emails" Email
+Person "1" -> "0..*" Relation
+Relation "1" --> "1" RelationDesignation
+Person "1" --> "1" VATnumber
+Person "1" --> "1"Name
+Person "1" --> "1" PhoneNumber
+Person "1" --> "1" BirthDate
+Person "1" ---> "1" Address
+
+'CategoryTree
+CategoryTree "1" --> "1 family" FamilyID
+StandardCategory -.|> Category
+CustomCategory -.|> Category
+CategoryTree "1" -up-> "0..*" Category
+StandardCategory "1" ---> "0..1 parentID" CategoryID
+StandardCategory "1" ---> "1 ID" CategoryID
+StandardCategory "1" --> "1" CategoryDesignation
+CustomCategory "1" ---> "0..1 parentID" CategoryID
+CustomCategory "1" ---> "1 ID" CategoryID
+CustomCategory "1" --> "1" CategoryDesignation
+
+'Note
+Note as N1
+    - Family tem emails dos family members e email do admin;
+    - CategoryTree tem FamilyID que liga à sua familia;
+    - A partir do root no CategoryTreeAggregate têm-se acesso às categorias da família
+end Note
+
+@enduml

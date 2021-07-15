@@ -1,0 +1,17 @@
+@startuml
+
+left to right direction
+
+title Use Case Diagram - System Manager
+
+actor "System Manager" as sm
+
+usecase "create a standard category" as uc001
+usecase "get the standard categories \ntree" as uc002
+usecase "create a family and set a \nfamily administrator" as uc010
+
+sm -- uc001
+sm -- uc002
+sm -- uc010
+
+@enduml

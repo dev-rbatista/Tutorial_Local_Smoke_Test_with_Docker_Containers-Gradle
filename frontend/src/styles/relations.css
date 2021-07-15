@@ -1,0 +1,38 @@
+.sc-iCoGMd btMzkF {
+
+    background-color: yellow;
+}
+
+.roleStyle{
+    font-family: OpenSans-Regular;
+    font-size: 20px;
+    color: #0a0a0a;
+    line-height: 1.2;
+    font-weight: unset;
+    width: 40%;
+    left: 30px;
+    top: 0;
+}
+
+.nameStyle{
+    font-family: OpenSans-Regular;
+    font-size: 20px;
+    color: #0a0a0a;
+    line-height: 1.2;
+    font-weight: bold;
+    width: 40%;
+
+    padding-left: 8vw;
+    top: 0;
+}
+
+.header{
+    font-family: OpenSans-Regular;
+    font-size: 20px;
+    color: #0a0a0a;
+    line-height: 1.2;
+    font-weight: bold;
+    width: 40%;
+    align-content: center;
+    top: 0;
+}

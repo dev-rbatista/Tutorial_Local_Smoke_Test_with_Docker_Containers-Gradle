@@ -1,0 +1,181 @@
+:root {
+    --backgroundGreenOpacity: rgba(226, 223, 223, 0.7);
+    --backgroundGreen: #52ec85;
+    --backgroundGreyOpacity: rgba(255, 255, 255, 0.6);
+    --backgroundGrey: #e2dfdf;
+    --backgroundGreyHover: #999797;
+    --backgroundBlack: #262626;
+    --backgroundBlackOpacity: rgba(38, 38, 38, 0.8);
+    --backgroundBlackOpacity2: rgba(38, 38, 38, 0.2);
+    --backgroundBlackOpacity3: rgba(38, 38, 38, 0.1);
+    --backgroundGreenHover: #3bac5f;
+    --defaultFont: Helvetica;
+}
+
+.font-class {
+    font-family: Helvetica;
+    font-color: var(--backgroundGrey);
+}
+
+.logo {
+    width: 90%;
+    height: auto;
+    text-align: center;
+}
+
+.button-one {
+    align-items: center;
+    position: center;
+    cursor: pointer;
+    color: var(--backgroundBlack);
+    font-size: 20px;
+    font-weight: bold;
+    text-transform: uppercase;
+    width: 100%;
+    border: 0;
+    padding: 15px 0;
+    border-radius: 5px;
+    background: var(--backgroundGreenOpacity);
+    text-align: center;
+}
+
+.button-one-small {
+    align-items: center;
+    position: center;
+    cursor: pointer;
+    color: var(--backgroundBlack);
+    font-size: 10px;
+    font-weight: bold;
+    text-transform: uppercase;
+    width: 80%;
+    border: 0;
+    padding: 5px 10px;
+    border-radius: 5px;
+    margin-left: 5px;
+    /*background: var(--backgroundGreenOpacity);*/
+    text-align: center;
+}
+
+.button-profile-alignment {
+    grid-column-start: 2;
+    grid-column-end: 3;
+    align-self: center;
+}
+
+.button-grid{
+    display: grid;
+    grid-template-columns: 2fr 1fr ;
+    padding: 10px;
+
+}
+
+.button-one-invert {
+    align-items: center;
+    position: center;
+    cursor: pointer;
+    color: var(--backgroundGrey);
+    font-size: 20px;
+    font-weight: bold;
+    text-transform: uppercase;
+    width: 100%;
+    border: 0;
+    padding: 15px 0;
+    border-radius: 5px;
+    background: var(--backgroundBlackOpacity);
+    text-align: center;
+}
+
+.button-test {
+    background: linear-gradient(to bottom, var(--backgroundGreen) 5%, var(--backgroundGreen) 100%);
+    background-color: var(--backgroundGreen);
+    border-bottom: 10px var(--backgroundGreyHover) !important;
+    display: inline-block;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 24px;
+    padding: 6px 36px;
+    text-decoration: none;
+}
+
+.button-one:hover {
+    background: linear-gradient(to bottom, var(--backgroundGreenHover) 5%, var(--backgroundGreenHover) 100%);
+    background-color: var(--backgroundGreenHover);
+}
+
+.button-one:active {
+    position: relative;
+    top: 1px;
+}
+
+.button-two {
+    align-items: center;
+    position: center;
+    cursor: pointer;
+    color: var(--backgroundBlack);
+    font-size: 12px;
+    font-weight: bold;
+    text-transform: uppercase;
+    width: 100%;
+    border: 0;
+    padding: 15px 15px;
+    margin: 10px;
+    border-radius: 5px;
+    background: var(--backgroundBlackOpacity2);
+    text-align: center;
+}
+
+.button-two-small {
+    align-items: center;
+    position: center;
+    cursor: pointer;
+    color: var(--backgroundBlack);
+    font-size: 16px;
+    font-weight: bold;
+    text-transform: uppercase;
+    width: 40%;
+    border: 0;
+    padding: 15px 15px;
+    margin: 10px;
+    border-radius: 5px;
+    background: var(--backgroundBlackOpacity2);
+    text-align: center;
+}
+
+.button-three {
+    align-items: center;
+    position: center;
+    cursor: pointer;
+    color: var(--backgroundBlack);
+    font-size: 12px;
+    font-weight: bold;
+    text-transform: uppercase;
+    width: 100%;
+    border: 0;
+    padding: 15px 15px;
+    margin: 10px;
+    border-radius: 5px;
+    background: var(--backgroundBlackOpacity3);
+    text-align: center;
+}
+
+.button-two:hover {
+    background: linear-gradient(to bottom, var(--backgroundGreenHover) 5%, var(--backgroundGreenHover) 100%);
+    background-color: var(--backgroundGreenHover);
+
+}
+
+.button-two:active {
+    position: relative;
+    top: 1px;
+}
+
+.button-two-small:hover {
+    background: linear-gradient(to bottom, var(--backgroundGreenHover) 5%, var(--backgroundGreenHover) 100%);
+    background-color: var(--backgroundGreenHover);
+
+}
+
+.button-two-small:active {
+    position: relative;
+    top: 1px;
+}

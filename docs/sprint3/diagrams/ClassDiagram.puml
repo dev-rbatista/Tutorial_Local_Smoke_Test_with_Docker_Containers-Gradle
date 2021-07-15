@@ -1,0 +1,113 @@
+@startuml
+
+hide empty members
+
+
+package controllers {}
+
+class Application {
+}
+
+class CategoryService {
+}
+
+class StandardCategory {
+}
+
+class CustomCategory {
+}
+
+class FamilyService {
+}
+
+class AccountService {
+}
+
+class TransactionService {
+}
+
+class RelationService{
+}
+
+class Family {
+}
+
+class CashAccount {
+}
+
+class Account {
+}
+
+class FamilyMember {
+}
+
+class MoneyValue {
+}
+
+class Relation {
+}
+
+class CashTransaction {
+}
+
+interface Account {
+}
+
+interface Transaction {
+}
+
+interface Category{
+}
+
+class AccountData{
+}
+
+controllers -- Application
+Application *-- FamilyService : has
+Application *-- CategoryService : has
+Application *-- AccountService : has
+Application *-- RelationService : has
+Application *-- TransactionService : has
+Application *-- EmailService : has
+
+AccountService o-- FamilyService : knows
+CategoryService o-- FamilyService : knows
+RelationService o-- FamilyService : knows
+AccountService -o TransactionService : knows
+TransactionService o- CategoryService : knows
+EmailService o-- FamilyService : knows
+
+AccountService *-- Account : has list
+TransactionService *-- Transaction : has list
+CategoryService *-- Category : has list
+RelationService *-- Relation : has list
+
+CashAccount -o CashTransaction : has
+CustomCategory o- Family
+
+FamilyService *-- Family : has list
+Family *-- FamilyMember : has list
+Relation o-- FamilyMember
+Family -o Relation
+
+
+class CashTransaction implements Transaction
+class CashAccount implements Account
+class BankAccount implements Account
+class BankSavingsAccount implements Account
+class CreditCardAccount implements Account
+
+class CustomCategory implements Category
+class StandardCategory implements Category
+
+CashAccount *-- AccountData : has
+BankAccount *-- AccountData : has
+BankSavingsAccount *-- AccountData : has
+CreditCardAccount *-- AccountData : has
+
+AccountData *-- MoneyValue : has
+CashTransaction *-- MoneyValue
+
+AccountData o- FamilyMember : has
+
+@enduml

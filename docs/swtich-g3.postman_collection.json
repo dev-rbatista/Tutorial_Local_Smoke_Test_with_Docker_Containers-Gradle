@@ -1,0 +1,583 @@
+{
+	"info": {
+		"_postman_id": "f6146f5a-7e92-48bd-9a39-fcce5e1339c7",
+		"name": "swtich-g3",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Families Options",
+			"request": {
+				"method": "OPTIONS",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/families",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"families"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Family and Set Admin",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"emailID\": \"tonyze@email.com\",\n  \"name\": \"tony\",\n  \"birthDate\": \"12/12/1990\",\n  \"vatNumber\": \"999999999\",\n  \"phone\": 919999999,\n  \"street\": \"rua\",\n  \"city\": \"New York\",\n  \"houseNumber\": \"23\",\n  \"zipCode\": \"4400-265\",\n  \"familyName\": \"Silva\",\n  \"localDate\": \"14/05/2021\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/families",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"families"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Null Name Add Family and Set Admin",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"emailID\": \"tonyze@email.com\",\n  \"name\": \"tony\",\n  \"birthDate\": \"12/12/1990\",\n  \"vatNumber\": \"999999999\",\n  \"phone\": 919999999,\n  \"street\": \"rua\",\n  \"city\": \"New York\",\n  \"houseNumber\": \"23\",\n  \"zipCode\": \"4400-265\",\n  \"familyName\": null,\n  \"localDate\": \"14/05/2021\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/families",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"families"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Empty Name Add Family and Set Admin",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"emailID\": \"tonyze@email.com\",\n  \"name\": \"tony\",\n  \"birthDate\": \"12/12/1990\",\n  \"vatNumber\": \"999999999\",\n  \"phone\": 919999999,\n  \"street\": \"rua\",\n  \"city\": \"New York\",\n  \"houseNumber\": \"23\",\n  \"zipCode\": \"4400-265\",\n  \"familyName\": \"\",\n  \"localDate\": \"14/05/2021\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/families",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"families"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Family Options",
+			"request": {
+				"method": "OPTIONS",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/families/@tonyze@email.com",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"families",
+						"@tonyze@email.com"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "People Options",
+			"request": {
+				"method": "OPTIONS",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/people",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"people"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Family Member",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"adminID\": \"tonyze@email.com\",\n  \"emailID\": \"tonyson@email.com\",\n  \"name\": \"tony\",\n  \"birthDate\": \"12/12/2000\",\n  \"vatNumber\": \"999999998\",\n  \"phone\": 919999989,\n  \"street\": \"rua\",\n  \"city\": \"New York\",\n  \"houseNumber\": \"23\",\n  \"zipCode\": \"4400-265\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/people",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"people"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Empty Name Family Member",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"adminID\": \"tonyze@email.com\",\n  \"emailID\": \"tonyson@email.com\",\n  \"name\": \"  \",\n  \"birthDate\": \"12/12/2000\",\n  \"vatNumber\": \"999999998\",\n  \"phone\": 919999989,\n  \"street\": \"rua\",\n  \"city\": \"New York\",\n  \"houseNumber\": \"23\",\n  \"zipCode\": \"4400-265\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/people",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"people"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Null birth Date Add Family Member",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"adminID\": \"tonyze@email.com\",\n  \"emailID\": \"tonyson@email.com\",\n  \"name\": \"tony\",\n  \"birthDate\": \"12:12:1993\",\n  \"vatNumber\": \"999999998\",\n  \"phone\": 919999989,\n  \"street\": \"rua\",\n  \"city\": \"New York\",\n  \"houseNumber\": \"23\",\n  \"zipCode\": \"4400-265\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/people",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"people"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Invalid birth Date Add Family Member",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"adminID\": \"tonyze@email.com\",\n  \"emailID\": \"tonyson@email.com\",\n  \"name\": \"tony\",\n  \"birthDate\": \"12/12/2000\",\n  \"vatNumber\": \"999999998\",\n  \"phone\": 919999989,\n  \"street\": \"rua\",\n  \"city\": \"New York\",\n  \"houseNumber\": \"23\",\n  \"zipCode\": \"4400-265\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/people",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"people"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Family Member Options",
+			"request": {
+				"method": "OPTIONS",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/people/tonyson@email.com",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"people",
+						"tonyson@email.com"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Email",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"a!notheremail@email.com\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/people/tonyson@email.com/emails",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"people",
+						"tonyson@email.com",
+						"emails"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Invalid characters Add Email",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"anotheremail@email.com\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/people/tonyson@email.com/emails",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"people",
+						"tonyson@email.com",
+						"emails"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Null email Add Email",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/people/tonyson@email.com/emails",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"people",
+						"tonyson@email.com",
+						"emails"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Empty email Add Email",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"anotheremail@email.com\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/people/tonyson@email.com/emails",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"people",
+						"tonyson@email.com",
+						"emails"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Blank email Add Email",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"     \"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/people/tonyson@email.com/emails",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"people",
+						"tonyson@email.com",
+						"emails"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Profile Info",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/people/tonyson@email.com",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"people",
+						"tonyson@email.com"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Account",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"designation\": \"Comprar Mackbook\",\n    \"initialAmount\": \"100.00\",\n    \"currency\": \"EUR\",\n    \"ownerID\": \"tonyson@email.com\",\n    \"accountType\": \"cash\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/accounts",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"accounts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Null currency Add Account Success",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"designation\": \"Comprar Mackbook\",\n    \"initialAmount\": \"100.00\",\n    \"currency\": null,\n    \"ownerID\": \"tonyson@email.com\",\n    \"accountType\": \"cash\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/accounts",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"accounts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Invalid Account Type",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"designation\": \"Comprar Mackbook\",\n    \"initialAmount\": \"100.00\",\n    \"currency\": \"EUR\",\n    \"ownerID\": \"tonyson@email.com\",\n    \"accountType\": \"visa\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/accounts",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"accounts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Standard Category",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"categoryDescription\": \"Casa\",\n    \"parentCategory\": \"asdasd\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/categories",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"categories"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get standart category tree",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/categories",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"categories"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Costum category tree",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/families/@tonyze@email.com/categories",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"families",
+						"@tonyze@email.com",
+						"categories"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

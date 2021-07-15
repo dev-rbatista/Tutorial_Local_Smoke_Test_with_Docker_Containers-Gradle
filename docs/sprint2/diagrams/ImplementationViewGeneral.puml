@@ -1,0 +1,27 @@
+@startuml
+
+title General Implementation View - SP02
+
+rectangle a [
+Correlated with "Family \nFinance Management System" \ncomponent of System Overview
+]
+package FFMSystem {
+package ui
+package controllers
+package domain
+}
+rectangle b [
+Correlates with "FFM_UI" \ncomponent of LogicView
+]
+rectangle c [
+Correlates with "FFM_BusinessLogic" \ncomponent of LogicView
+]
+
+a -. FFMSystem
+ui -> controllers
+controllers -> domain
+ui -. b
+controllers -. c
+domain -. c
+
+@enduml

@@ -1,0 +1,96 @@
+@startuml
+
+hide empty members
+hide circles
+left to right direction
+title Domain Model Diagram - SP02
+
+
+class Family {
+uniqueID
+name
+registrationDate
+}
+
+class FamilyMember {
+name
+birthDate
+address
+vatNumber
+email
+telephone
+ccNumber
+}
+
+
+class BankSavingsAccount {
+uniqueID
+balance
+transactions
+description
+}
+
+class BankAccount {
+uniqueID
+balance
+transactions
+description
+}
+
+class CreditCardAccount {
+uniqueID
+balance
+transactions
+interestDebt
+description
+}
+
+
+class CashAccount {
+uniqueID
+balance
+transactions
+description
+}
+
+class Relations {
+designation
+familyMemberA
+familyMemberB
+parentalPermission
+}
+
+
+class Category {
+uniqueID
+name
+parentCategory
+}
+
+class Transaction {
+targetAccount
+date
+amount
+category
+designation
+credit/Debit
+}
+
+Family "*" -- "*" Category : has standard >
+Family "1" -- "0..*" Category : has custom >
+Family "1" -- "0..1" CashAccount : has >
+Family "1" -- "0..1" FamilyMember : has administrator >
+Family "1" -- "1..*" FamilyMember : has members >
+Family "1" -- "0..*" Relations : has >
+'Relation has the FamilyMembers to whom it pertains
+FamilyMember "1" -- "0..*" BankSavingsAccount : has >
+FamilyMember "1" -- "0..*" CreditCardAccount : has >
+FamilyMember "1" -- "0..*" BankAccount : has >
+FamilyMember "1" -- "0..*" CashAccount : has >
+CashAccount "1" -- "0..*" Transaction : has >
+CreditCardAccount "1" -- "0..*" Transaction : has >
+BankAccount "1" -- "0..*" Transaction : has >
+BankSavingsAccount "1" -- "0..*" Transaction : has >
+Category "1  " -- " 0..1   " Category : has parent
+
+@enduml

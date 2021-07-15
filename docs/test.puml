@@ -1,0 +1,28 @@
+@startuml
+
+abstract class Account{
+}
+
+abstract class NonCashAccount{
+}
+
+class CashAccount{
+}
+
+class BankAccount{
+}
+
+class BankSavingsAccount{
+}
+
+class CreditCardAccount{
+}
+
+CashAccount --|> Account
+NonCashAccount --|> Account
+
+BankAccount --|> NonCashAccount
+BankSavingsAccount --|> NonCashAccount
+CreditCardAccount --|> NonCashAccount
+
+@enduml

@@ -1,0 +1,298 @@
+@startuml
+left to right direction
+title Class Diagram - SP01
+
+class AddEmailController {
+  - Application ffmApplication
+  + boolean addEmail()
+}
+
+class AddFamilyAdministratorController {
+ - Application ffmApplication
+ + List<> familiesWithoutAdministrator()
+ + boolean addFamilyAdministrator()
+}
+
+class AddFamilyController {
+  - Application ffmApplication
+  + boolean addFamily()
+}
+
+class AddFamilyMemberController {
+  - Application ffmApplication;
+  - boolean addFamilyMember()
+}
+
+class AddRelationController {
+  - Application ffmApplication
+  + boolean createRelation()
+}
+
+class AddStandardCategoryController {
+  - Application ffmApplication;
+  + boolean addStandardCategory()
+}
+
+class CreateFamilyCashAccountController{
+  - Application ffmApplication
+  + boolean createFamilyCashAccount()
+}
+
+class GetCategoryTreeController {
+  - Application ffmApplication
+  + boolean getCategoryTree()
+}
+
+class GetFamilyMemberProfileController {
+  - Application ffmApplication
+  + MemberProfileDTO getMemberProfiel()
+}
+
+class GetFamilyMembersListController {
+  - Application ffmApplication
+  + boolean getFamilyMemberAndRelation()
+}
+
+class GetStandardCategoriesTreeController {
+  - Application ffmApplication
+  + List<StandardCategoryDTO> getStandardCategories()
+}
+
+class Application {
+  - CategoryService categoryService
+  - FamilyService familyService
+  + CategoryService getCategoryService()
+  + FamilyService getFamilyService()
+}
+
+class CategoryService {
+  - List<StandardCategory> categories
+  + boolean addStandardCategory()
+  - StandardCategory getStandardCategoryByID()
+  - boolean isCategoryWithSameNameAlreadyPresent()
+  - boolean isParentIDInList()
+  - int generateCategoryID()
+  + List<StandardCategory> getCategories()
+}
+
+class StandardCategory {
+  - int categoryID
+  - String categoryName
+  - StandardCategory parentCategory
+  + int getParentID()
+  + int getCategoryID()
+  + String getName()
+  - boolean isNameValid()
+  + boolean isIDOfThisCategory()
+}
+
+class CustomCategory {
+  - int categoryID
+  - String categoryName
+  - StandardCategory parentStandardCategory
+  - CustomCategory parentCustomCategory
+  + String getCategoryName()
+  + int getCategoryID()
+  + int getParentID()
+  - boolean isNameValid()
+}
+
+class CategoryTreeDTO {
+  - List<StandardCategory> standardCategories
+  - List<CustomCategory> customCategories
+  + List getStandardCategories()
+  + List getCustomCategories()
+  + void printTree()
+  + String[] getArrayOfStandardCategoriesName()
+  + void printChildren()
+}
+
+class FamilyService {
+  - List<Family> families
+  - int generateFamilyID()
+  + List<CustomCategory> getCustomCategories()
+  + boolean addEmail()
+  - int findFamilyIndexByID()
+  - boolean checkIfEmailPresent()
+  + void addFamily()
+  + boolean addFamily()
+  + boolean createRelation()
+  + Family getFamily()
+  - boolean checkIfFamilyExists()
+  + boolean addFamilyMember()
+  + boolean addFamilyAdministrator()
+  + boolean verifyAdministratorPermission()
+  + List getFamilyMembersRelationDTOList
+  + boolean createFamilyCashAccount()
+  + MemberProfileDTO getFamilyMemberProfile()
+  + List familiesWithoutAdministrator()
+}
+
+class FamilyMemberRelationDTO {
+  - String name
+  - String relationDesignation
+  + String getName()
+  + String getRelationDesignation()
+}
+
+class FamilyWithoutAdministratorDTO {
+  - String familyName
+  - int familyID
+}
+
+class Family {
+  - int familyID
+  - String familyName
+  - Date registrationDate
+  - List <FamilyMember> familyMembers
+  - List<String> relationDesignations
+  - CashAccount familyCashAccount
+  - List<CustomCategory> familyCustomCategories
+  - boolean isNameValid()
+  - boolean isDateValid()
+  + List<FamilyMember> getFamilyMembers()
+  + int getFamilyID()
+  + List<CustomCategory> getFamilyCustomCategories()
+  + boolean isIDOfThisFamily()
+  - int findFamilyMemberIndexByID()
+  + boolean verifyAdministrator()
+  + boolean hasDesignation()
+  + boolean checkIfVatExists()
+  - boolean checkIfCCNumberExists()
+  + boolean addToRelationDesignationList()
+  + boolean addRelationToFamilyMember()
+  + FamilyMember getFamilyMemberByID()
+  + void addFamilyMember()
+  + void addFamilyMemberArray()
+  + int numberOfFamilyMembers()
+  + boolean addEmail()
+  + boolean addFamilyMember()
+  + boolean addFamilyAdministrator()
+  + boolean createFamilyCashAccount()
+  - boolean hasCashAccount()
+  + List getFamilyMembersRelationDTOList()
+  + boolean hasAdministrator
+  + familyWithoutAdministratorDTO()
+  + MemberProfileDTO getFamilyMemberProfile()
+}
+
+class CashAccount {
+  - int CashAccountID
+  - double balance
+  - boolean validateID()
+  - boolean validateBalance()
+  + int getCashAccountID()
+  + double getBalance()
+  + void changeBalance()
+}
+
+class FamilyMember {
+  - CCNumber ccNumber
+  - String name
+  - String birthDate
+  - List<PhoneNumber> phoneNumbers
+  - List<EmailAddress> emails
+  - VatNumber vatNumber
+  - Address adress
+  - Relation relation
+  - boolean administrator
+  + boolean validateName()
+  + boolean validateBirthDate()
+  + boolean validateEmail()
+  + boolean validatePhone()
+  + List<EmailAddress> getEmails()
+  + int getVatNumber()
+  + int getID()
+  + String getRelation()
+  + String getName()
+  + void makeAdmin()
+  + boolean isAdministrator()
+  # String getFamilyMemberID()
+  + boolean addEmail()
+  # void addRelation()
+  + MemberProfileDTO createProfile()
+  + FamileMemberRelationDTO createFamilyMemberRelation()
+}
+
+class MemberProfileDTO {
+  - String name
+  - Date birthDate
+  - List<PhoneNumber> phoneNumbers
+  - List<EmailAddress> emails
+  - VatNumber vatNumber
+  - Address address
+  - Relation relation
+  - boolean administrator
+}
+
+class Address {
+  - String street
+  - String postalCode
+  - String local
+  - String city
+  + boolean validateStreet()
+  + boolean validatePostalCode()
+  + boolean validateLocal()
+  + boolea validateCity()
+}
+
+class CCNumber {
+  - String ccNumber
+  + String getCcNumber()
+  - boolean validateNumber()
+  - int GetNumberFromChar()
+}
+
+class PhoneNumber {
+  - int phoneNumber
+  + boolean validate()
+}
+
+class EmailAddress {
+  - String email
+  + String getEmail()
+  - boolean validate()
+  - boolean checkFormat()
+}
+
+class Relation {
+  - String relationDesignation
+  - void isValid()
+  + String getRelationDesignation()
+}
+
+class VatNumber {
+  - int vatNumber
+  + boolean validateVatNumber()
+  + int getVatNumber()
+}
+
+AddEmailController --> Application
+AddFamilyController --> Application
+AddFamilyAdministratorController --> Application
+AddFamilyMemberController --> Application
+AddRelationController --> Application
+AddStandardCategoryController --> Application
+CreateFamilyCashAccountController --> Application
+GetCategoryTreeController --> Application
+GetFamilyMemberProfileController --> Application
+GetFamilyMembersListController --> Application
+GetStandardCategoriesTreeController --> Application
+Application --> FamilyService
+Application --> CategoryService
+CategoryService --> CustomCategory
+CategoryService --> StandardCategory
+CategoryService -left-> CategoryTreeDTO
+FamilyService -right-> FamilyWithoutAdministratorDTO
+FamilyService --> Family
+Family --> CashAccount
+Family --> FamilyMember
+Family -right-> FamilyMemberRelationDTO
+FamilyMember --> Address
+FamilyMember --> CCNumber
+FamilyMember --> PhoneNumber
+FamilyMember --> Relation
+FamilyMember -left-> MemberProfileDTO
+FamilyMember --> EmailAddress
+FamilyMember --> VatNumber
+@enduml

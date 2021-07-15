@@ -1,0 +1,17 @@
+@startuml
+left to right direction
+
+title System Overview Hypothesis I - SP02
+
+note "Each actor has a dedicated UI" as a
+component "Family Finance Management System" {
+}
+() "System \nManager UI" as smUI
+() "Family \nAdministrator UI" as faUI
+() "Family \nMember UI" as fmUI
+
+smUI --# "Family Finance Management System"
+faUI --# "Family Finance Management System"
+fmUI --# "Family Finance Management System"
+
+@enduml

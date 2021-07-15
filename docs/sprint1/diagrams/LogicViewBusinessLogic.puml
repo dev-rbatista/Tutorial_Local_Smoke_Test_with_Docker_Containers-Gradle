@@ -1,0 +1,33 @@
+@startuml
+
+title Business Logic View - SP01
+
+circle "BL_API" as BL_API
+
+component FFM_BusinessLogic as FFM_BL <<component>> {
+   component Controllers <<component>> {
+   }
+   circle Model_API
+   circle Service_API
+   circle Utils_API
+   component Model <<component>> {
+   }
+   component Services <<component>> {
+   }
+   component Utils <<component>> {
+   }
+}
+
+BL_API -# FFM_BL
+
+FFM_BL - Controllers
+Controllers -( Model_API
+Controllers -up-( Service_API
+Controllers -down-( Utils_API
+Service_API )-right- Services
+Model_API -right- Model
+Utils_API )-right- Utils
+Services -( Model_API
+Utils -up-( Model_API
+
+@enduml

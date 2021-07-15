@@ -1,0 +1,557 @@
+# US150 Get Profile Information
+
+# 1. Requirements
+
+## 1.1. Client Notes
+
+**As a family member, I want to get my profile’s information.**
+
+We interpreted this requirement as the function of a user to receive their personal profile information.
+
+- A MemberProfile needs to have the following information:
+   - Name;
+   - Email (ID)
+   - Birth Date;
+   - Email (other emails);
+   - VAT Number;
+   - Phone Number(none or more);
+   - Address;
+
+
+## 1.2. Dependencies
+
+### 1.2.1. Pre-conditions
+
+To be able to **get family member's profile information**, some user stories need to be implemented in first place. 
+Before everything else, the *Application* needs to have a family with family members. So, **the system manager needs to create a family and assign a family administrator** because the administrator will have the responsibility of adding family members to his family.
+After the **family administrator adds the family members** it will be possible to execute this US by each member. 
+
+### 1.2.2. Other User Stories
+
+The following users stories need to be executed before US150:
+
+- US010 As system manager, I want to create a family and set the family administrator
+
+- US101 As a family administrator, I want to add family members;
+
+## 1.3. Acceptance Criteria
+
+### 1.3.1. Success Cases
+
+This user story is always executed correctly since it doesn't need any data entry neither validation.
+It just gets family member stored information and shows it in the UI.
+
+### 1.3.2. Failure Cases
+
+In this US there aren't any direct failure scenarios because it just retrives already validated information that belongs to a family member.
+The possible failure cases are related with wrong execution of the dependent user stories from the section **1.2.2.**.
+
+## 1.4. System Sequence Diagram
+
+*As a Family Member, I want to get my profile´s information*
+
+```plantuml
+@startuml
+
+header SSD
+title Get my profile information
+autonumber
+actor "FamilyMember" as Actor
+participant "System" as System
+activate Actor
+Actor -> System : Get my profile information
+activate System
+System --> Actor : Return Family Member Data (Name, Email (ID), Birthdate, \nOther Emails, Vat Number, Phone Numbers and Address)  
+deactivate System
+deactivate Actor
+
+@enduml
+```
+
+
+# 2. Analysis
+
+## 2.1 Summary
+
+The profile information we need to obtain in this user story contains the personal information of the user.
+This includes _Name_, _BirthDate_, _Address_, _VATNumber_ and _PrimaryEmail_, as well as a list of any other _Emails_ and a list of any _PhoneNumbers_ registered in the application.
+
+
+## 2.2. Domain Model Excerpt
+
+```plantuml
+@startuml
+header Domain Model US150
+hide methods
+hide circle
+skinparam linetype ortho
+
+class Person{
+- name
+- birthDate
+- vatNumber
+- address
+}
+
+class Email{
+}
+
+class PhoneNumber{
+}
+
+Person "1" -> "0..*" PhoneNumber: has 
+Person "1" --> "1..*" Email : has 
+@enduml
+```
+
+# 3. Design
+
+## 3.1. Design decisions
+
+To fulfill this requirement it is required for the actor to select they want to get their profile information.
+
+The user's primary email (it's identification) will be automatically retrieved by checking who is logged into the application.
+
+To allow the output of all the data required we opted to create a ProfileDTO gathering all the relevant profile information.
+
+[COMMENT]: # (A criação do DTO de saida será feita na classe person. O DTO é criado com um builder que lhe passa os dados.
+Esses dados são passados a primitivos directamente ou convertidos quando desempacotados?)
+
+## 3.2. Class Diagram
+
+
+![img](../diagrams/US150_GetPersonProfileInfo.png)
+
+```puml
+@startuml
+header Class Diagram
+title US150 Get Family Member Profile Information
+
+skinparam linetype polyline
+skinparam class {
+BackgroundColor LightBlue
+ArrowColor Black
+BorderColor DarkBlue
+}
+hide empty members
+
+class GetFamilyMemberProfileController {
+  + getFamilyMemberProfile()
+}
+
+class Application {
+  + getPersonRepository()
+  + getLoggedPerson()
+}
+
+class GetFamilyMemberProfileService {
+  + getFamilyMemberProfile()
+}
+
+class ProfileDTO {
+}
+
+class PersonRepository <<Repository>> {
+  + getPersonByID()
+  + getFamilyMemberProfile()
+}
+
+class Person <<Entity>> <<Root>> {
+  + getFamilyMemberProfile()
+}
+
+class Address <<ValueObject>> {
+}
+
+class Email <<ValueObject>> <<ID>> {
+}
+
+class BirthDate <<ValueObject>> {
+}
+
+class PhoneNumber <<ValueObject>> {
+}
+
+class Name <<ValueObject>> {
+}
+
+class VATNumber <<ValueObject>> {
+}
+
+
+GetFamilyMemberProfileController -r--> Application : application
+GetFamilyMemberProfileController ..> GetFamilyMemberProfileService
+GetFamilyMemberProfileController ..> ProfileDTO
+
+GetFamilyMemberProfileService --> Application : application
+GetFamilyMemberProfileService ..> PersonRepository
+
+PersonRepository *-- "1..*" Person
+
+'Ligação de ProfileDTO para PersonRepo e GetCenasService?!
+
+Person ..> ProfileDTO
+
+Person --> "1" Email : id
+Person --> "0..*" Email : otherEmails
+Person --> "1" Address : address
+Person --> "1" BirthDate : birthDate
+Person --> "0..*" PhoneNumber : phoneNumber
+Person --> "1" Name : name
+Person --> "1" VATNumber : vatNumber
+
+ProfileDTO -u-> Email
+ProfileDTO -u-> Address
+ProfileDTO -u-> BirthDate
+ProfileDTO -u-> PhoneNumber
+ProfileDTO -u-> Name
+ProfileDTO -u-> VATNumber
+
+@enduml
+```
+
+[comment]: # (Ligação de ProfileDTO para PersonRepo e GetCenasService?!)
+
+## 3.3. Functionality Use
+
+The GetFamilyMemberProfileController creates a new GetFamilyMemberProfileService using the Application.
+The GetFamilyMemberProfileService will invoke the Application to retrieve the PersonRepository.
+The PersonRepository will use the GetPersonByID method to find the person whose profile we want to return.
+The Person will then create a ProfileDTO containing all the data required for the user story (Name, Address,
+BirthDate, VATNumber, PrimaryEmail and any other Emails or PhoneNumbers)
+It will then return the ProfileDTO all the way back to the  GetFamilyMemberProfileController.
+
+## 3.4. Sequence Diagram
+
+The process to fulfill this requirement requires the actor to select they want to create a new family, which would
+prompt the input of the name for that family as well as the administrator email, and the other necessary data stated in
+2.1.  
+Given the current absence of an UI layer the required data will be passed directly into the CreateFamilyController.
+ation would occur at the moment of addition to the repository.
+
+
+//TODO change namings to reflect existent classes and methods
+
+````puml
+@startuml
+
+autonumber
+header Sequence Diagram - part 1
+title US150 Get profile information
+
+
+participant ": IPersonController" as controller <<interface>>
+participant ": PersonInternalDTOAssembler" as assembler
+participant "anInternalProfileDTO:\n InternalProfileDTO" as internalDTO
+participant ": IGetProfile\nInfoService" as service <<interface>>
+participant ": IPersonRepository" as repository <<interface>>
+participant ": aPersonIDJPA:\n PersonIDJPA" as personIDJPA
+participant ": IPersonRepositoryJPA" as repoJPA <<interface>>
+
+-> controller : getProfileInfo(personID)
+activate controller
+controller -> assembler : toInternalProfileDTO(personID)
+activate assembler
+assembler -> internalDTO** : create(personID)
+return anInternalProfileDTO
+controller -> service : getFamilyMemberProfile(anInternalProfileDTO)
+activate service
+
+service -> service : personID = InputPersonIDDTO.unpackPersonID()
+service -> repository : getByID(personID)
+activate repository
+repository -> personIDJPA** : create(personID.toString())
+repository -> repoJPA : findByID(personIDJPA)
+activate repoJPA 
+return aPersonJPA
+
+ref over repository 
+Creation of aPerson
+end
+return aPerson
+
+ref over service
+Creation of aProfileOutputDTO
+end 
+return aProfileOutputDTO
+
+ref over controller
+Link creation
+end
+
+<-- controller : responseEntity(anExternalDTO, Httpstatus.OK)
+deactivate controller
+
+@enduml
+````
+
+````puml
+@startuml
+
+autonumber
+header Sequence Diagram
+title Creation of aPerson :  personJPA = personAssembler.toDomain(aPersonJPA)
+
+participant ": IPersonRepository" as personRepository <<interface>>
+participant "personAssembler : PersonDataDomainAssembler" as assembler
+participant "aPersonJPA : PersonJPA" as personJPA
+participant "personID : PersonID" as personID
+participant "familyID : FamilyID" as familyID
+participant "address : Adress" as address
+participant "emails : List<EmailAddress>" as emails
+participant "phoneNumbers : List <PhoneNumber>" as phoneNumbers
+participant "aPerson\n : Person" as aPerson
+
+
+activate personRepository
+
+personRepository -> assembler : toDomain(aPersonJPA)
+activate assembler
+
+assembler -> personJPA : getId()
+activate personJPA
+personJPA --> assembler : personIDJPA
+deactivate personJPA
+assembler -> personID** :  create(personIDJPA)
+
+assembler -> personJPA : getName()
+activate personJPA
+personJPA --> assembler : name
+deactivate personJPA
+
+assembler -> personJPA : getBirthDate()
+activate personJPA
+personJPA --> assembler : birthDate
+deactivate personJPA
+
+assembler -> personJPA : getVat()
+activate personJPA
+personJPA --> assembler : vat
+deactivate personJPA
+
+assembler -> personJPA : getPhones()
+activate personJPA
+personJPA --> assembler : phoneNumbers
+deactivate personJPA
+
+
+assembler -> personJPA : getAddress()
+activate personJPA
+personJPA --> assembler : address
+deactivate personJPA
+
+assembler -> personJPA : getFamilyID()
+activate personJPA
+personJPA --> assembler : familyIDJPA
+deactivate personJPA
+
+assembler -> familyID** :  create(familyIDJPA)
+
+assembler -> address** : create(addressJPA.getStreet(), addressJPA.getCity(), addressJPA.getZipCode(), addressJPA.getDoorNumber())
+
+assembler -> aPerson** : create(personID, name, birthDate, vatNumber, familyID)
+
+assembler -> emails** : generateEmailAddressList(personJPA.getEmails())
+activate emails
+return emails
+
+assembler -> phoneNumbers** : generetePhoneNumberList(phoneNumbers)
+activate phoneNumbers
+return phoneNumbers
+
+assembler -> aPerson : setAddress(address)
+activate aPerson
+aPerson --> assembler
+deactivate aPerson
+assembler -> aPerson : setPhones(phoneNumbers)
+activate aPerson
+aPerson --> assembler
+deactivate aPerson
+assembler -> aPerson : setEmails(emails)
+activate aPerson
+aPerson --> assembler
+deactivate aPerson
+assembler -> personRepository : aPerson
+deactivate assembler
+<- personRepository
+
+@enduml
+````
+
+
+````puml
+@startuml
+
+autonumber 6
+header Sequence Diagram - part 2
+title US150 ProfileOutputDTO creation
+
+participant ":IGetProfileInfoService" as service
+participant "personAssembler:\n PersonDomainDTOAssembler " as assembler
+participant "aPerson \n: Person" as person
+participant "anAddress:\n Address" as address
+participant "aProfileDTO \n: ProfileOutputDTO" as profiledto
+
+activate service
+service -> assembler : toDTO(aPerson)
+activate assembler
+
+assembler -> person : getID()
+activate person
+return id
+
+assembler -> person : getName()
+activate person
+return name
+
+assembler -> person : getBirthDate()
+activate person
+return birthDate
+
+assembler -> person : getOtherEmail()
+activate person
+return emails
+
+assembler -> person : getVat()
+activate person
+return vat
+
+assembler -> person : getPhoneNumbers()
+activate person
+return phoneNumbers
+
+assembler -> person : getAddress()
+activate person
+return address
+
+assembler -> address : getStreet()
+activate address
+return street
+
+assembler -> address : getCity()
+activate address
+return city
+
+assembler -> address : getZipCode()
+activate address
+return zipCode
+
+assembler -> address : getdoorNumber()
+activate address
+return doorNumber
+
+service -> profiledto** : create 
+
+activate profiledto
+service -> profiledto : setID(id)
+service -> profiledto : setName(name)
+service -> profiledto : setBirthDate(birthDate)
+service -> profiledto : setEmails(emails)
+service -> profiledto : setVat(vat)
+service -> profiledto : setPhoneNumbers(phoneNumbers)
+service -> profiledto : setStreet(street)
+service -> profiledto : setCity(city)
+service -> profiledto : setZipCode(zipCode)
+service -> profiledto : setDoorNumber(doorNumber)
+
+deactivate profiledto
+
+@enduml
+````
+
+
+## 3.5. Applied Patterns
+
+We applied the following principles:
+
+- GRASP:
+   - Information expert:
+      - This pattern is used in Person class because it stores all the Person attributes associated with it and creates its own DTO. PersonRepository just stores all the Person´s objects.
+      
+   - Controller:
+      - To deal with the responsibility of receiving input from outside the system (first layer after the UI) we use a case controller.
+
+   - Pure Fabrication:
+      - In this user story the Application and GetProfileInfoService class were used, which does not represent business domain concepts. They were created to be responsible for obtaining profile information.
+
+[comment]: # (- Protected Variation:
+      - O uso do DTO é PV?! Se houver uma alteração nos atributos da classe Person, a sua informação estando encapsulada num DTO só vai sofrer alterações na construção e na "entrega".)
+
+- SOLID:
+   - Single-responsibility principle:
+      - this pattern was used in the GetPersonInfoService class, in which is the only responsibility is manage person profile operations;
+      - also used in ProfileDTO, its only responsibility is to store and deliver Person Data.
+   
+   - Open-Closed Principle:
+      - Any adicional field will not impact the methods. Any change within Person attributes will have impact only on ProfileDTO creation and UI representation.
+
+## 3.6. Tests
+
+### 3.6.1. Person
+
+#### 3.6.1.1. Success
+
+**Test 1:** Test ProfileDTO creation
+
+#### 3.6.1.2 Failure
+
+No failure tests 
+
+_____
+
+### 3.6.2. PersonRepository
+
+#### 3.6.2.1. Success
+
+**Test 2:** Test if the PersonRepository gets the Person by his email (ID)
+
+**Test 3:** Test if the PersonRepository gets the ProfileDTO from Person using his email (ID)
+
+#### 3.6.2.2 Failure
+
+No failure tests
+
+_____
+
+### 3.6.3. GetProfileInfoService
+
+#### 3.6.3.1. Success
+
+**Test 4:** Test if the Service gets the ProfileDTO from it the PersonRepository
+
+#### 3.6.3.2. Failure
+
+No failure tests
+
+_____
+
+### 3.6.4. GetFamilyMemberProfileController
+
+#### 3.6.4.1. Success
+
+**Test 5:** Test if the Controller gets the ProfileDTO from the GetProfileInfoService
+
+#### 3.6.4.2. Failure
+
+No failure tests
+
+_____
+
+
+# 4. Implementation
+
+
+# 5. Integration
+
+[comment]: # (All other US's/features that this one will be added on !!!!!!)
+
+The development of this user story was the basis for the family structure where the FamilyMembers are stored and was
+thus crucial for the development of the other User Stories
+
+
+# 6. Observations
+
+[comment]: # (Tudo o que nao encaixe em lado nenhum vai para aqui AKA LIXOOOOOOO !!!!!!!)
+
+As with the Standard Category the family ID will probably need to be reworked in a future sprint to allow for more
+complex ID information if needed (probably using a UUID)

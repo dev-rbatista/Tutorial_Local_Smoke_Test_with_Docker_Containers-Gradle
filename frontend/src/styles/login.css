@@ -1,0 +1,228 @@
+body {
+    background-color: #19191a;
+}
+
+.login {
+    position: absolute;
+    top:0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 450px;
+    margin: auto;
+    overflow: hidden;
+    background-color: #52ec85;
+    padding: 30px 30px 30px 30px;
+    border-radius: 10px;
+    width: 400px;
+    box-shadow: 5px 10px 10px rgba(0, 12, 15, 0.5);
+}
+
+
+#login-email {
+    display: block;
+    border-radius: 5px;
+    font-size: 14px;
+    background: white;
+    width: 100%;
+    border: 0;
+    padding: 10px 0;
+}
+
+#password {
+    display: block;
+    border-radius: 5px;
+    font-size: 14px;
+    background: white;
+    width: 100%;
+    border: 0;
+    padding: 10px 0;
+
+}
+
+#login-button
+{
+    align-items: center ;
+    position: center;
+    cursor: pointer;
+    color: #070000;
+    font-size: 20px;
+    font-weight: bold;
+    text-transform: uppercase;
+    width: 100%;
+    border: 0;
+    padding: 15px 0;
+    border-radius: 5px;
+    background-color: #e2dfdf;
+}
+
+#login-button:hover {
+    background-color: #ccc8ce;
+    color: #22227b;
+    border-color: white;
+}
+
+#apes-image
+{
+    margin-left: 100px;
+}
+
+.row {
+    height: auto;
+}
+
+.column-left {
+    text-align: center;
+    font-size: 1rem;
+    float: left;
+    border: 2px;
+    width: 40%;
+}
+
+.column-right {
+
+    float: right;
+    text-align: center;
+    border: 2px;
+    width: 60%;
+    display: inline-block;
+    padding-top: 20px;
+}
+
+.row-button {
+    height: auto;
+    width: 100%;
+    margin-top: 30px;
+    border: solid 2px #675f6b;
+    display: inline-block;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+
+.col-one {
+    text-align: center;
+    font-size: 1rem;
+    float: left;
+    border: 2px;
+    width: 33.33%;
+}
+
+.col-two {
+    text-align: center;
+    font-size: 1rem;
+    float: left;
+    border: 2px;
+    width: 33.33%;
+}
+
+.col-three {
+    text-align: center;
+    font-size: 1rem;
+    float: left;
+    border: 2px;
+    width: 33.33%;
+}
+
+.row-divider2 {
+    height: 40px;
+    background-color: grey;
+}
+/*
+
+#systemManager
+{
+    align-items: center ;
+    position: center;
+    cursor: pointer;
+    color: #fff;
+    font-size: 12px;
+    !*margin-top: 10px;
+    margin-bottom: 10px;
+    margin-right: 5px;*!
+
+    width: 100%;
+    border: 0;
+    padding: 20px 0;
+    !*margin-left: 10px;*!
+    !*margin-right: 20px;*!
+    border-radius: 5px;
+    background-color: #f34ee3;
+}
+
+#familyAdministrator
+{
+    align-items: center ;
+    position: center;
+    cursor: pointer;
+    color: #fff;
+    font-size: 12px;
+   !* margin-top: 10px;
+    margin-bottom: 10px;*!
+    width: 100%;
+    border: 0;
+    padding: 20px 0;
+    !*margin-left: 10px;*!
+    !*margin-right: 20px;*!
+    border-radius: 5px;
+    background-color: #f34ee3;
+}
+
+#familyMember
+{
+    align-items: center ;
+    position: center;
+    cursor: pointer;
+    color: #fff;
+    font-size: 12px;
+    !* margin-top: 10px;
+     margin-bottom: 10px;*!
+    width: 100%;
+    border: 0;
+    padding: 20px 0;
+    !*margin-left: 10px;*!
+    !*margin-right: 20px;*!
+    border-radius: 5px;
+    background-color: #f34ee3;
+}
+*/
+
+
+.login-profile-title
+{
+    font-size: 14px;
+}
+
+input[type=radio] {
+    position: absolute;
+    visibility: hidden;
+    display: none;
+}
+
+.lbl-role {
+    display: inline-flex;
+    cursor: pointer;
+    font-weight: bold;
+    color: #000105;
+    font-size: 14px;
+
+    padding: 5px 20px;
+}
+
+input[type=radio]:checked + .lbl-role {
+    color: #ccc8ce;
+    background: #675f6b;
+}
+
+.lbl-role + input[type=radio] + .lbl-role {
+    border-left: solid 2px #675f6b;
+}
+
+.radio-group {
+    /*margin-top:20px;*/
+    border: solid 2px #675f6b;
+    display: inline-block;
+
+    border-radius: 10px;
+    overflow: hidden;
+}

@@ -1,0 +1,51 @@
+@startuml
+
+skinparam classBorderColor Black
+skinparam arrowColor Black
+skinparam stereotypeCBackgroundColor White
+skinparam stereotypeIBackgroundColor White
+hide empty members
+
+interface Account {
++ getAccountID()
++ getBalance()
++ changeBalance()
+}
+
+class CashAccount {
+}
+
+class BankAccount {
+- IBAN iban
+}
+
+class SavingsAccount {
+- double interestRate
+}
+
+class CreditCardAccount {
+- double withdrawalLimit
+}
+
+class AccountData {
+- double balance
+- String description
+- int accountID
+}
+
+interface Transaction {
++ getDate()
++ getAmount()
++ getCategory()
+}
+
+Account <|-up- CashAccount : implements
+Account <|-up- BankAccount : implements
+Account <|-up- SavingsAccount : implements
+Account <|-up- CreditCardAccount : implements
+AccountData -> Transaction : has list
+AccountData *-down- CashAccount : has
+AccountData *-down- BankAccount : has
+AccountData *-down- SavingsAccount : has
+AccountData *-down- CreditCardAccount : has
+@enduml

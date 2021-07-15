@@ -1,0 +1,30 @@
+@startuml
+
+left to right direction
+
+title Use Case Diagram - Family Member
+
+actor "System User" as su
+actor "Parent" as parent
+actor "Family Member" as fm
+
+usecase "login into the application" as uc080
+usecase "get my profile’s information" as uc150
+usecase "add an email account to my \nprofile" as uc151
+usecase "create or add personal accounts" as uc170
+usecase "transfer money and register payments" as uc180
+usecase "check the balance of one of my accounts" as uc185
+usecase "get the list of movements \non one of my accounts between two dates" as uc186
+usecase "check the balance of one \nof my children’s cash account" as uc188
+
+su -- uc080
+fm -- uc150
+fm -- uc151
+fm -- uc170
+fm -- uc180
+fm -- uc185
+fm -- uc186
+parent -- uc188
+
+
+@enduml
