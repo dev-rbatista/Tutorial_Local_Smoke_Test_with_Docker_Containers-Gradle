@@ -1,3 +1,13 @@
+This Project regards the Final Assignment of the DevOps discipline at the **.SWitCH() - Postgraduate in Software Development @ Instituto Superior de Engenharia do Porto, 2020/2021 edition**.
+
+For this Assignment, the task (my task, since there were 8 different tasks, one for each member of the group) was to execute a Local Smoke Test of the Application we had developed through the entire course (https://github.com/dev-rbatista/SWitCH-Project_Family-Finance-Application), in this case using Gradle as a build tool (Our project used Maven). 
+
+To that purpose we had to create a **Jenkins** Pipeline with all the necessary steps.
+
+This final task made us use all of the tools that we previously used in the Class Assignments (Git, Gradle, Jenkins, Docker, Virtualization).
+
+
+
 # Personal Finance Project
 
 # Track 4 - Gradle local smoke test of App with Docker Containers
